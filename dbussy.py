@@ -11,6 +11,7 @@ asyncio module.
 #-
 
 import os
+import sys
 import builtins
 import operator
 import array
@@ -28,7 +29,10 @@ from xml.etree import \
 from xml.sax.saxutils import \
     quoteattr as quote_xml_attr
 
-dbus = ct.cdll.LoadLibrary("libdbus-1.so.3")
+if sys.platform == "darwin":
+    dbus = ct.cdll.LoadLibrary("libdbus-1.3.dylib")
+else:
+    dbus = ct.cdll.LoadLibrary("libdbus-1.so.3")
 
 class DBUS :
     "useful definitions adapted from the D-Bus includes. You will need to use the" \
